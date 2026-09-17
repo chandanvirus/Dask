@@ -16,7 +16,7 @@ DASK is a full-stack employee attendance and leave management project with a Fas
 
 ```text
 Dask/
-|-- Project2/
+|-- IAMS/
 |   |-- Backend/
 |   |   |-- main.py
 |   |   |-- database.py
@@ -50,7 +50,7 @@ Dask/
 2. Install the backend dependencies:
 
 ```bash
-cd Project2/Backend
+cd IAMS/Backend
 pip install -r requirements.txt
 pip install python-dotenv
 ```
@@ -80,7 +80,7 @@ The frontend is written as static files and expects to be served locally. The ba
 
 To run the frontend:
 
-1. Open the `Project2/Frontend` folder in a static server.
+1. Open the `IAMS/Frontend` folder in a static server.
 2. Serve it on port `5500`.
 3. Start from `home.html`.
 
@@ -98,7 +98,7 @@ If you use the VS Code Live Server extension, this matches the current backend C
 
 ## API Overview
 
-Current backend routes in `Project2/Backend/main.py`:
+Current backend routes in `IAMS/Backend/main.py`:
 
 - `GET /`: basic API message
 - `GET /health`: health check
@@ -118,7 +118,7 @@ Current backend routes in `Project2/Backend/main.py`:
 - Tables are created automatically on backend startup via SQLAlchemy metadata.
 - The frontend fetches API data from `http://127.0.0.1:8000`.
 - Passwords are currently stored and checked as plain text in the backend.
-- `python-dotenv` is used by `database.py` but is not currently listed in `Project2/Backend/requirements.txt`.
+- `python-dotenv` is used by `database.py` but is not currently listed in `IAMS/Backend/requirements.txt`.
 
 ## Suggested Improvements
 
