@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Smart Attendance System</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<!-- Top Navigation -->
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <h2 class="sidebar-logo">DASK</h2>
+
+    <nav class="sidebar-menu">
+
+  <a href="index.html" class="active">
+    <i class="fa fa-chart-line"></i>
+    <span>Dashboard</span>
+  </a>
+
+  <a href="attendance.html">
+    <i class="fa fa-calendar-check"></i>
+    <span>Attendance</span>
+  </a>
+
+  <a href="leaves.html">
+    <i class="fa fa-plane"></i>
+    <span>Leaves</span>
+  </a>
+
+  <a href="reports.html">
+    <i class="fa fa-file"></i>
+    <span>Reports</span>
+  </a>
+
+  <a href="profile.html">
+  <i class="fa fa-user"></i>
+  <span>Profile</span>
+</a>
+
+</nav>
+
+    <div class="sidebar-profile" id="profileMenu">
+      <div class="avatar" id="navAvatar">S</div>
+      <span id="navUser"></span>
+
+      <div class="profile-dropdown" id="profileDropdown">
+        <button onclick="logout()">Logout</button>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+
+<!-- Main Content -->
+<div class="container">
+  <h1>Dashboard</h1>
+
+<div class="cards" id="adminCards">
+
+
+
+  <div class="card stat-card">
+    <div class="card-icon blue"><i class="fa-solid fa-users"></i></div>
+    <h3>Total Employees</h3>
+    <p id="totalEmployees">0</p>
+  </div>
+
+  <div class="card stat-card">
+    <div class="card-icon green"><i class="fa-solid fa-user-check"></i></div>
+    <h3>Present Today</h3>
+    <p id="presentToday">0</p>
+  </div>
+
+  <div class="card stat-card">
+    <div class="card-icon orange"><i class="fa-solid fa-plane-departure"></i></div>
+    <h3>On Leave</h3>
+    <p id="onLeave">0</p>
+  </div>
+
+  <div class="card stat-card">
+    <div class="card-icon red"><i class="fa-solid fa-clock"></i></div>
+    <h3>Late Entries</h3>
+    <p id="lateEntries">0</p>
+  </div>
+
+</div>
+
+</div>
+
+<!-- ADMIN CARDS -->
+<!-- <div class="cards" id="adminCards" style="display: none;">
+
+  <div class="card">
+    <h3>Total Employees</h3>
+    <p id="empCount">0</p>
+  </div>
+
+  <div class="card">
+    <h3>Present Today</h3>
+    <p id="presentCount">0</p>
+  </div>
+
+  <div class="card">
+    <h3>On Leave</h3>
+    <p id="leaveCount">0</p>
+  </div>
+
+  <div class="card">
+    <h3>Late Entries</h3>
+    <p id="lateCount">0</p>
+  </div>
+
+</div> -->
+
+
+<!-- EMPLOYEE CARDS -->
+<div class="cards" id="employeeCards" style="display:none;">
+
+  <div class="card stat-card">
+    <div class="card-icon orange"><i class="fa-solid fa-file-circle-check"></i></div>
+    <h3>Total Leaves Applied</h3>
+    <p id="leavesApplied">0</p>
+  </div>
+
+  <div class="card stat-card">
+    <div class="card-icon green"><i class="fa-solid fa-briefcase"></i></div>
+    <h3>Days Worked</h3>
+    <p id="daysWorked">0</p>
+  </div>
+
+  <div class="card stat-card">
+    <div class="card-icon blue"><i class="fa-solid fa-leaf"></i></div>
+    <h3>Leaves Available</h3>
+    <p id="leavesRemaining">0</p>
+  </div>
+
+  <div class="card stat-card">
+    <div class="card-icon red"><i class="fa-solid fa-hourglass-half"></i></div>
+    <h3>Pending Requests</h3>
+    <p id="pendingRequests">0</p>
+  </div>
+
+</div>
+
+
+<div class="charts-container">
+
+  <div class="chart-box">
+    <h3>Monthly Attendance</h3>
+    <canvas id="attendanceChart"></canvas>
+  </div>
+
+  <div class="chart-box">
+    <h3>Department Attendance</h3>
+    <canvas id="leaveChart"></canvas>
+  </div>
+
+</div>
+
+<!-- ================= UPCOMING HOLIDAYS ================= -->
+<div class="dashboard-card">
+  <div class="card-header">
+    <h2>Upcoming Holidays</h2>
+    <a href="holidays.html" class="view-all-link">View All</a>
+  </div>
+
+  <div id="upcomingHolidays" class="holiday-preview"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="dashboard.js"></script>
+</div>
+
+<script src="user.js"></script>
+<script src="userSession.js"></script>
+<script>
+  loadSidebarProfile();
+</script>
+<script src="holidays.js"></script>
+  </main>
+</div>
+</body>
+</html>

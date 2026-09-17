@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Leaves</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <h2 class="sidebar-logo">DASK</h2>
+
+    <nav class="sidebar-menu">
+
+  <a href="index.html" >
+    <i class="fa fa-chart-line"></i>
+    <span>Dashboard</span>
+  </a>
+
+  <a href="attendance.html">
+    <i class="fa fa-calendar-check"></i>
+    <span>Attendance</span>
+  </a>
+
+  <a href="leaves.html" class="active">
+    <i class="fa fa-plane"></i>
+    <span>Leaves</span>
+  </a>
+
+  <a href="reports.html">
+    <i class="fa fa-file"></i>
+    <span>Reports</span>
+  </a>
+
+  <a href="profile.html">
+  <i class="fa fa-user"></i>
+  <span>Profile</span>
+</a>
+
+</nav>
+
+    <div class="sidebar-profile" id="profileMenu">
+      <div class="avatar" id="navAvatar">S</div>
+      <span id="navUser"></span>
+
+      <div class="profile-dropdown" id="profileDropdown">
+        <button onclick="logout()">Logout</button>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+
+<div class="container">
+<h1 class="page-title">Leave Tracker</h1>
+
+<!-- Tabs -->
+<div class="leave-tabs">
+  <button class="tab active" onclick="showTab('summary', this)">Leave Summary</button>
+  <button class="tab" onclick="showTab('balance', this)">Leave Balance</button>
+  <button class="tab" onclick="showTab('requests', this)">Leave Requests</button>
+</div>
+
+<!-- Top Actions -->
+<div class="leave-topbar">
+ <button id="applyLeaveBtn" class="apply-leave-btn" onclick="openLeaveModal()">+ Apply Leave</button>
+</div>
+
+<!-- MAIN CARD -->
+<div id="summaryTab" class="leave-main-card">
+
+  <div class="empty-state" id="emptyState">
+    <img src="images/empty.png" class="empty-img">
+    <h3>No Leave Requests Yet</h3>
+    <p>Start by applying for your first leave.</p>
+    <button id="emptyStateAddRequestBtn" class="primary-btn" onclick="openLeaveModal()">Add Request</button>
+  </div>
+
+  <!-- Leave Table (Hidden initially) -->
+  <table class="leave-table" id="leaveTable" style="display:none;">
+    <thead>
+      <tr>
+        <th>Employee</th>
+        <th>Type</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Reason</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody id="leaveTableBody"></tbody>
+  </table>
+
+</div>
+
+<div id="balanceTab" class="leave-main-card" style="display:none;">
+
+  <div class="balance-cards">
+
+    <div class="balance-card">
+      <h3>Casual Leave</h3>
+      <p id="casualBalance">0 Days Left</p>
+    </div>
+
+    <div class="balance-card">
+      <h3>Sick Leave</h3>
+      <p id="sickBalance">0 Days Left</p>
+    </div>
+
+    <div class="balance-card">
+      <h3>Earned Leave</h3>
+      <p id="earnedBalance">0 Days Left</p>
+    </div>
+
+  </div>
+
+  <!-- ADMIN : Employee Leave Balance Table -->
+<div id="adminBalanceTable" style="margin-top:30px; display:none;">
+
+  <h2>Employee Leave Balance</h2>
+
+  <table class="leave-table">
+    <thead>
+      <tr>
+        <th>Employee</th>
+        <th>Casual Left</th>
+        <th>Sick Left</th>
+        <th>Earned Left</th>
+      </tr>
+    </thead>
+
+    <tbody id="employeeBalanceBody"></tbody>
+  </table>
+
+</div>
+
+</div>
+
+<div id="requestsTab" class="leave-main-card" style="display:none;">
+
+  <!-- Top filter bar -->
+  <div class="requests-topbar">
+    <select id="statusFilter" onchange="filterRequests()">
+      <option value="All">All Requests</option>
+      <option value="Pending">Pending</option>
+      <option value="Approved">Approved</option>
+      <option value="Rejected">Rejected</option>
+      <option value="Cancelled">Cancelled</option>
+    </select>
+  </div>
+
+  <table class="leave-table">
+    <thead>
+      <tr>
+        <th>Employee</th>
+        <th>Type</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Reason</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="requestsTableBody"></tbody>
+  </table>
+
+</div>
+
+<!-- APPLY LEAVE MODAL -->
+<div id="leaveModal" class="modal">
+
+  <div class="modal-content">
+
+    <span class="close-modal" onclick="closeLeaveModal()">✕</span>
+
+    <h2>Apply Leave</h2>
+
+    <div class="modal-form">
+
+  <div>
+    <label>Leave Type</label>
+    <select id="leaveType">
+      <option>Casual Leave</option>
+      <option>Sick Leave</option>
+      <option>Earned Leave</option>
+    </select>
+  </div>
+
+  <div>
+    <label>From Date</label>
+    <input type="date" id="fromDate">
+  </div>
+
+  <div>
+    <label>To Date</label>
+    <input type="date" id="toDate">
+  </div>
+
+  <div class="full-width">
+    <label>Reason</label>
+    <textarea id="reason"></textarea>
+  </div>
+
+  <div class="full-width" style="text-align:right;">
+    <button class="btn apply" onclick="applyLeave()">Submit Request</button>
+  </div>
+
+</div>
+
+  </div>
+</div>
+
+
+<script src="user.js"></script>
+<script src="leaves.js"></script>
+<script src="userSession.js"></script>
+<script>
+  loadSidebarProfile();
+</script>
+  </main>
+</div>
+</body>
+</html>

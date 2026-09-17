@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Reports</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <h2 class="sidebar-logo">DASK</h2>
+
+   <nav class="sidebar-menu">
+
+  <a href="index.html" >
+    <i class="fa fa-chart-line"></i>
+    <span>Dashboard</span>
+  </a>
+
+  <a href="attendance.html">
+    <i class="fa fa-calendar-check"></i>
+    <span>Attendance</span>
+  </a>
+
+  <a href="leaves.html" >
+    <i class="fa fa-plane"></i>
+    <span>Leaves</span>
+  </a>
+
+  <a href="reports.html" class="active">
+    <i class="fa fa-file"></i>
+    <span>Reports</span>
+  </a>
+
+  <a href="profile.html">
+  <i class="fa fa-user"></i>
+  <span>Profile</span>
+</a>
+
+</nav>
+
+    <div class="sidebar-profile" id="profileMenu">
+      <div class="avatar" id="navAvatar">S</div>
+      <span id="navUser"></span>
+
+      <div class="profile-dropdown" id="profileDropdown">
+        <button onclick="logout()">Logout</button>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+
+
+<div class="container">
+
+<h1>Reports & Analytics</h1>
+
+<!-- GLOBAL LOADING -->
+<div id="loadingSpinner" class="loading hidden">
+  <div class="spinner"></div>
+  <p>Generating report...</p>
+</div>
+
+<!-- ERROR MESSAGE -->
+<div id="errorBox" class="error hidden"></div>
+
+<!-- EMPTY STATE -->
+<div id="emptyState" class="empty hidden">
+  <h3>No Data Available</h3>
+  <p>Start using the system to generate reports.</p>
+</div>
+
+<!-- ================= SALARY REPORT ================= -->
+<div class="report-card">
+
+  <div class="report-header">
+    <h2>Salary Report</h2>
+
+    <div class="filters">
+      <select id="salaryMonth">
+        <option value="0">Jan</option>
+        <option value="1">Feb</option>
+        <option value="2">Mar</option>
+        <option value="3">Apr</option>
+        <option value="4">May</option>
+        <option value="5">Jun</option>
+        <option value="6">Jul</option>
+        <option value="7">Aug</option>
+        <option value="8">Sep</option>
+        <option value="9">Oct</option>
+        <option value="10">Nov</option>
+        <option value="11">Dec</option>
+      </select>
+
+      <select id="salaryYear">
+        <option>2025</option>
+        <option>2026</option>
+        <option>2027</option>
+      </select>
+
+      <button class="btn primary" onclick="generateSalaryReport()">Generate</button>
+      <button class="btn success" onclick="downloadCSV()">Download CSV</button>
+    </div>
+  </div>
+
+  <table class="report-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Department</th>
+        <th>Base Salary</th>
+        <th>Deductions</th>
+        <th>Net Salary</th>
+      </tr>
+    </thead>
+    <tbody id="salaryTableBody"></tbody>
+  </table>
+
+</div>
+
+
+<!-- ================= LEAVE UTILIZATION ================= -->
+<div class="report-card">
+  <h2>Leave Utilization</h2>
+
+  <table class="report-table">
+    <thead>
+      <tr>
+        <th>Employee</th>
+        <th>Total Allowance</th>
+        <th>Leaves Used</th>
+        <th>Remaining</th>
+      </tr>
+    </thead>
+    <tbody id="leaveUtilBody"></tbody>
+  </table>
+</div>
+
+
+<!-- ================= ATTENDANCE SUMMARY ================= -->
+<div class="report-card">
+  <h2>Attendance Summary</h2>
+
+  <div class="mini-cards">
+
+  <div class="mini-card">
+    <h4>Top Department</h4>
+    <p id="topDept">--</p>
+  </div>
+
+  <div class="mini-card">
+    <h4>Top Absentee</h4>
+    <p id="abs1">--</p>
+  </div>
+
+  <div class="mini-card">
+    <h4>Second Absentee</h4>
+    <p id="abs2">--</p>
+  </div>
+
+  <div class="mini-card">
+    <h4>Third Absentee</h4>
+    <p id="abs3">--</p>
+  </div>
+
+</div>
+
+  <table class="report-table">
+    <thead>
+      <tr>
+        <th>Employee</th>
+        <th>Days Present</th>
+        <th>Late Entries</th>
+        <th>Performance</th>
+      </tr>
+    </thead>
+    <tbody id="attendanceSummaryBody"></tbody>
+  </table>
+</div>
+
+</div>
+
+<script src="user.js"></script>
+<script src="reports.js"></script>
+<script src="userSession.js"></script>
+<script>
+  loadSidebarProfile();
+</script>
+  </main>
+</div>
+</body>
+</html>

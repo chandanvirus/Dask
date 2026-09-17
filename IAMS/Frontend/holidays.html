@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>All Holidays</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app-layout">
+
+  <!-- SIDEBAR (copy same sidebar from dashboard) -->
+
+  <main class="main-content">
+
+    <div class="dashboard-card">
+      <div class="card-header">
+        <h2>Holiday List</h2>
+        <button onclick="goBack()" class="btn primary">Back</button>
+      </div>
+
+      <table class="report-table">
+        <thead>
+          <tr>
+            <th>Holiday Name</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody id="holidayTable"></tbody>
+      </table>
+
+    </div>
+
+  </main>
+</div>
+
+<script src="holidays.js"></script>
+
+
+
+<script>
+function goBack(){
+  window.location.href = "index.html";
+}
+</script>
+
+
+<!-- <script>
+function loadHolidayTable(){
+  const tbody = document.getElementById("holidayTable");
+  tbody.innerHTML = "";
+
+  holidays.forEach(h=>{
+    tbody.innerHTML += `
+      <tr>
+        <td>${h.name}</td>
+        <td>${h.date}</td>
+      </tr>
+    `;
+  });
+}
+
+function goBack(){
+  window.location.href = "index.html";
+}
+
+document.addEventListener("DOMContentLoaded", loadHolidayTable);
+</script> -->
+
+</body>
+</html>

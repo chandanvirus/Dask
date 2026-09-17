@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Attendance</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<!-- Top Navigation (same as dashboard) -->
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <h2 class="sidebar-logo">DASK</h2>
+
+   <nav class="sidebar-menu">
+
+  <a href="index.html" >
+    <i class="fa fa-chart-line"></i>
+    <span>Dashboard</span>
+  </a>
+
+  <a href="attendance.html" class="active">
+    <i class="fa fa-calendar-check"></i>
+    <span>Attendance</span>
+  </a>
+
+  <a href="leaves.html">
+    <i class="fa fa-plane"></i>
+    <span>Leaves</span>
+  </a>
+
+  <a href="reports.html">
+    <i class="fa fa-file"></i>
+    <span>Reports</span>
+  </a>
+
+  <a href="profile.html">
+  <i class="fa fa-user"></i>
+  <span>Profile</span>
+</a>
+
+</nav>
+
+    <div class="sidebar-profile" id="profileMenu">
+      <div class="avatar" id="navAvatar">S</div>
+      <span id="navUser"></span>
+
+      <div class="profile-dropdown" id="profileDropdown">
+        <button onclick="logout()">Logout</button>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+
+<div class="container">
+
+<h1>Attendance</h1>
+
+<!-- EMPLOYEE VIEW -->
+<div id="employeeAttendance" style="display:none;">
+
+  <div class="emp-attendance-grid">
+
+    <!-- LEFT PROFILE CARD -->
+    <div class="emp-profile-card">
+        <h3 id="greetingText">Hi Employee 👋</h3>
+
+        <div class="emp-profile">
+            <div class="emp-avatar-big" id="empAvatarBig">S</div>
+            <div>
+                <h4 id="empNameBig"></h4>
+                <p class="status-green">Available for work</p>
+            </div>
+        </div>
+
+      <div class="live-time">
+    <p class="time-title">Current Time</p>
+    <h2 id="liveClock">00:00:00</h2>
+    <p id="todayDate"></p>
+
+    <hr style="margin:12px 0; opacity:.2">
+
+    <p class="time-title">Working Timer</p>
+    <h2 id="workTimer">00:00:00</h2>
+</div>
+    </div>
+
+
+    <!-- RIGHT CHECKIN CARD -->
+   <div class="emp-checkin-card">
+    <h3>Attendance</h3>
+
+    <div class="time-row">
+       <div>
+          <p class="time-label">Start Time</p>
+          <h2 id="startTimeText">--:--</h2>
+       </div>
+
+       <div>
+          <p class="time-label">End Time</p>
+          <h2 id="endTimeText">--:--</h2>
+       </div>
+    </div>
+
+    <p id="todayStatus" class ="attendance-status"style="margin:10px 0; font-weight:600;">
+        Not Checked In
+    </p>
+
+    <button id="checkInBtn" class="big-check-btn">Check In</button>
+    <button id="checkOutBtn" class="big-check-btn logout" disabled>Check Out</button>
+</div>
+
+
+  <!-- RECENT ATTENDANCE TABLE -->
+  <div class="recent-attendance-card">
+      <h3>Recent Attendance</h3>
+
+      <table class="attendance-table">
+          <thead>
+              <tr>
+                  <th>Date</th>
+                  <th>Check In</th>
+                  <th>Check Out</th>
+                  <th>Status</th>
+              </tr>
+          </thead>
+          <tbody id="attendanceBody"></tbody>
+      </table>
+  </div>
+
+</div>
+</div>
+
+
+
+<!-- ADMIN VIEW -->
+<div id="adminAttendance" style="display:none;">
+
+  <div class="admin-attendance-grid">
+
+    <!-- LEFT : DAILY VIEW -->
+    <div class="daily-card">
+
+      <div class="card-header">
+        <h2>Daily Attendance Overview</h2>
+        <div class="control-group">
+        <input type="date" id="dailyViewDate">
+       <button class="load-btn" onclick="loadDailyView()">Load</button>
+     </div>
+      </div>
+
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Employee Name</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="dailyViewBody"></tbody>
+      </table>
+
+    </div>
+
+
+    <!-- RIGHT : MONTHLY VIEW -->
+    <div class="monthly-card">
+
+      <div class="card-header">
+        <h2>Monthly Attendance Summary</h2>
+      </div>
+
+      <div class="monthly-controls">
+        <div class="control-group">
+       <select id="monthlyEmployeeSelect"></select>
+       <input type="month" id="monthlySelect">
+      <button class="load-btn" onclick="loadMonthlyCalendar()">Load</button>
+      </div>
+      </div>
+
+      <div id="calendarGrid" class="calendar-grid"></div>
+
+      <div class="month-stats">
+        <div class="stat present">Days Present: <span id="statPresent">0</span></div>
+        <div class="stat absent">Days Absent: <span id="statAbsent">0</span></div>
+        <div class="stat half">Half Days: <span id="statHalf">0</span></div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+<script src="user.js"></script>
+<script src="attendance.js"></script>
+<script src="userSession.js"></script>
+<script>
+  loadSidebarProfile();
+</script>
+  </main>
+</div>
+</body>
+</html>
