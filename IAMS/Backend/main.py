@@ -179,6 +179,10 @@ def health_check():
 @app.post("/employees")
 def create_employee(data: EmployeeCreate, db: Session = Depends(get_db)):
 
+    existing_email = db.query(Employee).filter(Employee.email == data.email).first()
+    if existing_email:
+        raise HTTPException(status_code=400, detail="Email already registered")
+
     new_emp = Employee(
         name=data.name,
         email=data.email,

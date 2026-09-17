@@ -4,7 +4,7 @@ async function loadHolidayTable(){
 
   if(!tbody) return;   // ⭐ prevents dashboard error
 
-  const res = await fetch("/api/holidays");
+  const res = await fetch("http://127.0.0.1:8000/holidays");
   const holidays = await res.json();
 
   tbody.innerHTML = "";

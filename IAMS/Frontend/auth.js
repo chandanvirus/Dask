@@ -58,7 +58,7 @@ async function register(){
 
   try{
 
-    const res = await fetch("/api/employees",{
+    const res = await fetch("http://127.0.0.1:8000/employees",{
       method:"POST",
       headers:{
         "Content-Type":"application/json"
@@ -74,7 +74,16 @@ async function register(){
     });
 
     if(!res.ok){
-      showAlert("Registration failed", "error");
+      const error = await res.json().catch(() => null);
+      let errorMessage = "Registration failed";
+
+      if (typeof error?.detail === "string") {
+        errorMessage = error.detail;
+      } else if (Array.isArray(error?.detail) && error.detail.length > 0) {
+        errorMessage = error.detail[0]?.msg || errorMessage;
+      }
+
+      showAlert(errorMessage, "error");
       return;
     }
 
@@ -103,7 +112,7 @@ async function login(){
 
   try{
 
-    const res = await fetch("/api/login",{
+    const res = await fetch("http://127.0.0.1:8000/login",{
       method:"POST",
       headers:{
         "Content-Type":"application/json"

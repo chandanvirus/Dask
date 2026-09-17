@@ -11,7 +11,7 @@ if (!currentUser) {
 }
 
 async function fetchEmployees() {
-  const response = await fetch("/api/employees");
+  const response = await fetch("http://127.0.0.1:8000/employees");
   return await response.json();
 }
 
@@ -143,7 +143,7 @@ async function saveProfile() {
   const deptInput = document.getElementById("profileDept");
   const updatedDept = deptInput ? deptInput.value.trim() : null;
   try {
-    const response = await fetch(`/api/employees/${currentProfile.id}`, {
+    const response = await fetch(`http://127.0.0.1:8000/employees/${currentProfile.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"

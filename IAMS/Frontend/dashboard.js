@@ -1,6 +1,6 @@
 async function loadAttendance(){
 
-  const res = await fetch("/api/attendance");
+  const res = await fetch("http://127.0.0.1:8000/attendance");
   return await res.json();
 
 }
@@ -8,14 +8,14 @@ async function loadAttendance(){
 
 async function loadLeaves(){
 
-  const res = await fetch("/api/leaves");
+  const res = await fetch("http://127.0.0.1:8000/leaves");
   return await res.json();
 
 }
 
 async function loadEmployees(){
 
-  const res = await fetch("/api/employees");
+  const res = await fetch("http://127.0.0.1:8000/employees");
   return await res.json();
 
 }
@@ -37,7 +37,7 @@ const today = new Date().toLocaleDateString();
 // 🔥 Load Employees From Backend
 async function loadEmployeesFromBackend() {
   try {
-    const res = await fetch("/api/employees");
+    const res = await fetch("http://127.0.0.1:8000/employees");
     const data = await res.json();
 
     const employeeCount = data.filter(e => 
@@ -54,7 +54,7 @@ async function loadEmployeesFromBackend() {
 // 🔥 Load Holidays From Backend
 async function loadHolidaysFromBackend() {
   try {
-    const res = await fetch("/api/holidays");
+    const res = await fetch("http://127.0.0.1:8000/holidays");
     const holidays = await res.json();
 
     const container = document.getElementById("upcomingHolidays");

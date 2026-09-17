@@ -34,17 +34,17 @@ function formatInputDateToDisplay(dateValue) {
 }
 
 async function fetchAttendanceRecords() {
-  const response = await fetch("/api/attendance");
+  const response = await fetch("http://127.0.0.1:8000/attendance");
   return await response.json();
 }
 
 async function fetchEmployees() {
-  const response = await fetch("/api/employees");
+  const response = await fetch("http://127.0.0.1:8000/employees");
   return await response.json();
 }
 
 async function saveAttendanceRecord(record) {
-  const response = await fetch("/api/attendance", {
+  const response = await fetch("http://127.0.0.1:8000/attendance", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -238,7 +238,7 @@ document.getElementById("endTimeText").innerText = "--:--";
 // 👨‍💼 ADMIN TABLE
 // async function renderTable(){
 
-//   const response = await fetch("/api/attendance");
+//   const response = await fetch("http://127.0.0.1:8000/attendance");
 
 //   const records = await response.json();
 
